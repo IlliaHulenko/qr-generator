@@ -1,2 +1,5 @@
-[build]
-base_path = "/qr-generator/"
+[application]
+name = "qr-generator"
+
+[web.config]
+base_path = "qr-generator"
