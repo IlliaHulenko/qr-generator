@@ -1,3 +1,2 @@
 [build]
-out_dir = "dist"
 base_path = "/qr-generator/"

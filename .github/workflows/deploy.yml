@@ -31,28 +31,22 @@ jobs:
         run: cargo install dioxus-cli --locked
 
       - name: Build Dioxus App
-        run: dx build --release --base-path /qr-generator/
-
-      - name: Verify build output
-        run: |
-          ls -la dist/
-          if [ ! -f "dist/index.html" ]; then
-            echo "❌ index.html not found! Check build logs above."
-            exit 1
-          fi
-          echo "✅ index.html exists. Inspect asset paths in Actions logs."
+        run: dx build --release
 
       - name: Locate built files
         id: find_output
         run: |
-          if [ -d "dist" ]; then
-            echo "path=dist" >> $GITHUB_OUTPUT
-          elif [ -d "target/dx" ]; then
-            echo "path=target/dx" >> $GITHUB_OUTPUT
-          else
-            echo "path=dist" >> $GITHUB_OUTPUT
-            echo "⚠️ Warning: Neither dist/ nor target/dx/ found. Check build logs."
-          fi
+          OUT_DIR=$(find . -type f -name "index.html" | xargs dirname | head -1)
+          OUT_DIR="${OUT_DIR#./}"
+          echo "path=$OUT_DIR" >> $GITHUB_OUTPUT
+          echo "📁 Output directory: $OUT_DIR"
+          # Verify asset paths in CI logs
+          grep -oE 'href="[^"]*"|src="[^"]*"' "$OUT_DIR/index.html" | head -5
+
+      - name: Enable SPA routing (prevents 404 on refresh)
+        run: |
+          OUT_DIR="${{ steps.find_output.outputs.path }}"
+          echo "/* /index.html 200" > "$OUT_DIR/_redirects"
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
