@@ -44,12 +44,12 @@ jobs:
         run: dx build --release --platform web
 
       - name: Enable SPA routing (GitHub Pages 404 fallback)
-        run: cp dist/index.html dist/404.html
+        run: cp target/dx/qr-generator/release/web/public/index.html target/dx/qr-generator/release/web/public/404.html
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: target/dx/qr-generator/release/web/public
 
   deploy:
     needs: build
