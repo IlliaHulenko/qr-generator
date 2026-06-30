@@ -2,4 +2,4 @@
 name = "qr-generator"
 
 [web.config]
-base_path = "qr-generator"
+base_path = "/qr-generator/"
