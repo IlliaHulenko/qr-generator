@@ -32,7 +32,7 @@ jobs:
         run: cargo install dioxus-cli --locked
 
       - name: Build Dioxus App
-        run: dx bundle --release --debug-symbols=false --out-dir . --base-path qr-generator
+        run: dx build --release
 
       - name: Verify build output
         run: ls -la dist/
