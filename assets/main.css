@@ -1,0 +1,52 @@
+/* App-wide styling */
+html,
+body {
+    background-color: #0f1116;
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    height: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+.input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 2px solid #333;
+    background-color: #1a1d24;
+    color: whitesmoke;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.input input:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.qr {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
