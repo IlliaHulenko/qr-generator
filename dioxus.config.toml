@@ -1,5 +1,5 @@
 [application]
 name = "qr-generator"
 
-[web.config]
+[web]
 base_path = "/qr-generator/"

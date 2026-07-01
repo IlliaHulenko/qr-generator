@@ -43,6 +43,12 @@ jobs:
       - name: Build Dioxus App
         run: dx build --release --platform web
 
+      - name: Fix absolute paths for GitHub Pages
+        run: |
+          PUBLIC_DIR="target/dx/qr-generator/release/web/public"
+          sed -i 's|src="/|src="|g' $PUBLIC_DIR/index.html
+          sed -i 's|href="/|href="|g' $PUBLIC_DIR/index.html
+
       - name: Enable SPA routing (GitHub Pages 404 fallback)
         run: cp target/dx/qr-generator/release/web/public/index.html target/dx/qr-generator/release/web/public/404.html
 
