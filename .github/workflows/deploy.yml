@@ -41,7 +41,16 @@ jobs:
           fi
 
       - name: Build Dioxus App
-        run: dx build --release --platform web
+        # <--- CRITICAL FIX: Explicitly add --base-path here
+        run: dx build --release --platform web --base-path /qr-generator/
+
+      - name: Verify asset paths (Debug Step)
+        # <--- This step will show you if the paths are fixed
+        run: |
+          echo "🔍 Checking generated HTML for asset paths..."
+          grep -E "(src=|href=)" target/dx/qr-generator/release/web/public/index.html | head -5
+          # If you see paths starting with "/", it is still broken.
+          # You should see paths starting with "/qr-generator/" or "./"
 
       - name: Enable SPA routing (GitHub Pages 404 fallback)
         run: cp target/dx/qr-generator/release/web/public/index.html target/dx/qr-generator/release/web/public/404.html
